@@ -19,7 +19,7 @@ class Car(models.Model):
     year = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey("core.Category", on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey("core.Category", on_delete=models.SET_NULL, null=True, related_name='cars')
 
     class Meta:
         db_table = "car"
