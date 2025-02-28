@@ -1,5 +1,5 @@
 from django.db import models
-
+from core.managers import BaseManager
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -20,6 +20,9 @@ class Car(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey("core.Category", on_delete=models.SET_NULL, null=True, related_name='cars')
+    is_sold = models.BooleanField(default=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=10000)
+    quantity = models.IntegerField(default=1)
 
     class Meta:
         db_table = "car"
@@ -27,3 +30,5 @@ class Car(models.Model):
 
     def __str__(self):
         return f"{self.make} {self.model}"
+
+    objects = BaseManager()
