@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %} Car Details {% endblock %}
+
+{% block body %}
+
+    <h2>{{ car.make }} - {{ car.model }}</h2>
+    <hr>
+    <p>description: {{ car.description }}</p>
+    <p>Publish year: {{ car.year }}</p>
+    <span>Category: {{ car.category.name }}</span>
+    <p>Price: {{ car.price }}</p>
+    <p>Quantity: {{ car.quantity }}</p>
+    <hr>
+<a href="{% url 'core:index' %}">Home page</a>
+
+{% endblock %}

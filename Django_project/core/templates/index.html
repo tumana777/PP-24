@@ -1,20 +1,17 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Page</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} Home Page {% endblock %}
+
+{% block body %}
+
     <h1>Car List</h1>
-    <ol>
+    <ul>
     {% for car in cars %}
-        <li>{{ car }}</li>
+        <li><a href="{% url 'core:car_details' car.pk %}">{{ car }} </a>- Category: {{ car.category.name }}</li>
     {% endfor %}
-    </ol>
+    </ul>
     <hr>
+    <a href="{% url 'core:add_car' %}" style="margin-right: 50px">Add New Car</a>
     <a href="{% url 'core:about' %}">About Us</a>
-</body>
-</html>
+
+{% endblock %}
