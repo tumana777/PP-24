@@ -33,3 +33,18 @@ def add_car(request):
     print(request.method)
 
     return render(request, 'add_car.html', {'form': form})
+
+def update_car(request, car_pk):
+    car = get_object_or_404(Car, pk=car_pk)
+
+    if request.method == 'POST':
+        form = CarForm(request.POST, instance=car)
+
+        if form.is_valid():
+            form.save()
+            return redirect('core:car_details', car_pk=car.pk)
+
+    else:
+        form = CarForm(instance=car)
+
+    return render(request, 'car_update.html', {'form': form})
