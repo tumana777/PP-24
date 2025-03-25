@@ -6,7 +6,7 @@
 {% block title %}Update car info{% endblock %}
 
 {% block body %}
-    <form action="." method="post"  style="width: 500px; margin: 20px auto">
+    <form action="." method="post" enctype="multipart/form-data" style="width: 500px; margin: 20px auto">
         {% csrf_token %}
         {{ form|crispy }}
         <button type="submit" class="btn btn-primary">Update</button>

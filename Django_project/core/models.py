@@ -23,6 +23,7 @@ class Car(models.Model):
     is_sold = models.BooleanField(default=False)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=10000)
     quantity = models.IntegerField(default=1)
+    image = models.ImageField(upload_to='car_images/', null=True, blank=True)
 
     class Meta:
         db_table = "car"

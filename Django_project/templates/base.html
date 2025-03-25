@@ -22,9 +22,30 @@
                     <a href="{% url 'user:register' %}">Register</a>
                 </div>
             {% endif %}
+            <form action="{% url 'core:index' %}">
+                <input type="search" placeholder="Search by make or model" name="q" value="{{ search_query }}">
+
+                {% if category %}
+                    <input type="hidden" name="category" value="{{ category }}">
+                {% endif %}
+
+                {% if year %}
+                    <input type="hidden" name="year" value="{{ year }}">
+                {% endif %}
+
+                <button type="submit">Search</button>
+            </form>
             <a href="{% url 'core:index' %}">Home</a>
         </div>
         <hr>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            <hr>
+        {% endif %}
         {% block body %}
         {% endblock %}
     </div>

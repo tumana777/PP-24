@@ -6,6 +6,9 @@
 
     <h2>{{ car.make }} - {{ car.model }}</h2>
     <hr>
+    {% if car.image %}
+        <img src="{{ car.image.url }}" alt="car img">
+    {% endif %}
     <p>description: {{ car.description }}</p>
     <p>Publish year: {{ car.year }}</p>
     <span>Category: {{ car.category.name }}</span>

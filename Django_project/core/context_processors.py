@@ -5,5 +5,4 @@ def visit_counter(request):
         request.session['visits'] = visits
     else:
         visits = 0
-    print(visits)
     return {'visits': visits}

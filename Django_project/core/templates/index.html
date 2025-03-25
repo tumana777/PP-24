@@ -3,7 +3,25 @@
 {% block title %} Home Page {% endblock %}
 
 {% block body %}
+    <form action="">
+        <select name="category">
+            <option value="">All Categories</option>
+            {% for cat in categories %}
+                <option value="{{ cat.id }}" {% if category == cat.id|stringformat:'s' %}selected{% endif %}>
+                    {{ cat }}
+                </option>
+            {% endfor %}
+        </select>
 
+        {% if search_query %}
+            <input type="hidden" name="q" value="{{ search_query }}">
+        {% endif %}
+
+        <input type="number" name="year" placeholder="minimum year" value="{{ year }}">
+        <input type="number" name="max_year" placeholder="maximum year" value="{{ max_year }}">
+
+        <button type="submit">Filter</button>
+    </form>
     <h1>Car List</h1>
     <ul>
     {% for car in cars %}
