@@ -3,32 +3,46 @@
 {% block title %} Home Page {% endblock %}
 
 {% block body %}
-    <form action="">
-        <select name="category">
-            <option value="">All Categories</option>
-            {% for cat in categories %}
-                <option value="{{ cat.id }}" {% if category == cat.id|stringformat:'s' %}selected{% endif %}>
-                    {{ cat }}
-                </option>
+    <div class="row">
+        <div class="col-lg-3">
+                <form action="">
+                    <select name="category">
+                        <option value="">All Categories</option>
+                        {% for cat in categories %}
+                            <option value="{{ cat.id }}" {% if category == cat.id|stringformat:'s' %}selected{% endif %}>
+                                {{ cat }}
+                            </option>
+                        {% endfor %}
+                    </select>
+
+                    {% if search_query %}
+                        <input type="hidden" name="q" value="{{ search_query }}">
+                    {% endif %}
+
+                    <input type="number" name="year" placeholder="minimum year" value="{{ year }}">
+                    <input type="number" name="max_year" placeholder="maximum year" value="{{ max_year }}">
+
+                    <button type="submit">Filter</button>
+                </form>
+        </div>
+        <div class="col-lg-9">
+            <h1>Car List({{ total_car }})</h1>
+            <div class="row justify-content-between g-4">
+                {% for car in cars %}
+                <div class="card" style="width: 16rem;">
+                  {% if car.image %}
+                      <img src="{{ car.image.url }}" class="card-img-top" alt="...">
+                  {% endif %}
+                  <div class="card-body">
+                    <h5 class="card-title">{{ car.make }} {{ car.model }}</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="{% url 'core:car_details' car.pk %}" class="btn btn-primary">See full info</a>
+                  </div>
+                </div>
             {% endfor %}
-        </select>
-
-        {% if search_query %}
-            <input type="hidden" name="q" value="{{ search_query }}">
-        {% endif %}
-
-        <input type="number" name="year" placeholder="minimum year" value="{{ year }}">
-        <input type="number" name="max_year" placeholder="maximum year" value="{{ max_year }}">
-
-        <button type="submit">Filter</button>
-    </form>
-    <h1>Car List</h1>
-    <ul>
-    {% for car in cars %}
-        <li><a href="{% url 'core:car_details' car.pk %}">{{ car }} </a>- Category: {{ car.category.name }}</li>
-    {% endfor %}
-    </ul>
-    <hr>
+            </div>
+        </div>
+    </div>
     <a href="{% url 'core:add_car' %}" style="margin-right: 50px">Add New Car</a>
     <a href="{% url 'core:about' %}">About Us</a>
 

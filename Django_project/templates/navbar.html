@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a href="{% url 'core:index' %}">Home</a>
+    <div class="d-flex justify-content-between align-items-center">
+            {% if user.is_authenticated %}
+                <div class="d-flex justify-content-between align-items-center" style="width: 250px; margin-right: 20px">
+                    hello, {{ user.username }} <small>visits: {{ visits }}</small>
+                    <a href="{% url 'user:logout' %}">Logout</a>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-between align-items-center" style="width: 150px; margin-right: 20px">
+                    <a href="{% url 'user:login' %}">Log In</a>
+                    <a href="{% url 'user:register' %}">Register</a>
+                </div>
+            {% endif %}
+            <form class="d-flex" role="search" action="{% url 'core:index' %}">
+                <input class="form-control me-2" type="search" placeholder="Search by make or model" name="q" value="{{ search_query }}" aria-label="Search">
+
+                {% if category %}
+                    <input type="hidden" name="category" value="{{ category }}">
+                {% endif %}
+
+                {% if year %}
+                    <input type="hidden" name="year" value="{{ year }}">
+                {% endif %}
+
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+    </div>
+  </div>
+</nav>

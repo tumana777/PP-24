@@ -34,6 +34,7 @@ def index(request):
         'category': category,
         'year': year,
         'max_year': max_year,
+        'total_car': cars.count(),
     })
 
 def about(request):
