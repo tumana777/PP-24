@@ -4,10 +4,12 @@
 
 {% block body %}
 
-    <h2>{{ car.make }} - {{ car.model }}</h2>
+    <h2 style="text-align: center">{{ car.make }} - {{ car.model }}</h2>
     <hr>
     {% if car.image %}
-        <img src="{{ car.image.url }}" alt="car img">
+        <div class="d-flex justify-content-center mb-5">
+             <img src="{{ car.image.url }}" style="max-width: 400px" alt="car img">
+        </div>
     {% endif %}
     <p>description: {{ car.description }}</p>
     <p>Publish year: {{ car.year }}</p>
