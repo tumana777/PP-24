@@ -33,7 +33,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
-class CarSerializer(serializers.ModelSerializer):
+class CarListSerializer(serializers.ModelSerializer):
 
     category = CategorySerializer()
 
