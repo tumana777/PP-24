@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
+from datetime import timedelta
+
 from password.password import PASSWORD
 from pathlib import Path
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -150,6 +153,10 @@ INTERNAL_IPS = [
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 5
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=20),
 }
 
 # SESSION_COOKIE_AGE = 30
